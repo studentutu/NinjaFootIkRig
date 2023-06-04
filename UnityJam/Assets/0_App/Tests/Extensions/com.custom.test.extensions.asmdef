@@ -1,0 +1,31 @@
+{
+    "name": "com.custom.test.extensions",
+    "rootNamespace": "",
+    "references": [
+        "App.Core",
+        "App.Core.Attributes",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "com.custom.app",
+        "LeanTouch",
+        "UniRx",
+        "UniTask",
+        "UniTask.Addressables",
+        "UniTask.DOTween",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "Zenject",
+        "Zenject-TestFramework"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
