@@ -3098,6 +3098,7 @@ MonoBehaviour:
     _invertFinalNormal: 0
   _character: {fileID: 4460808988534071277}
   _hipRoot: {fileID: 6701662496806520167}
+  _minYMinRoot: -0.4
 --- !u!1 &3717749087881216922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3231,7 +3232,7 @@ Transform:
   - {fileID: 4460808988534071277}
   - {fileID: 8101736506756171783}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6972751270152851334
 CharacterController:
@@ -3293,8 +3294,8 @@ MonoBehaviour:
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1
-  GroundedOffset: -0.14
-  GroundBoxCheckSize: {x: 0.4, y: 0.34, z: 0.28}
+  GroundedOffset: -0.06
+  GroundBoxCheckSize: {x: 0.43, y: 0.34, z: 0.28}
   GroundLayers:
     serializedVersion: 2
     m_Bits: 65

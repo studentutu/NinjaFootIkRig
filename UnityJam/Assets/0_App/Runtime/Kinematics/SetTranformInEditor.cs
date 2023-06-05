@@ -15,6 +15,7 @@ namespace _0_App.Runtime.Kinematics
             if (ApplyPositionFrom)
             {
                 Target.position = Source.position;
+                Target.rotation = Source.rotation;
             }
         }
     }

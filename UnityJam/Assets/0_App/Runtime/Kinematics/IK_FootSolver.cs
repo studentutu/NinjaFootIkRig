@@ -8,72 +8,79 @@ public class IK_FootSolver : MonoBehaviour
     [Serializable]
     public class FootSolution
     {
-        [Tooltip("Local orientation will be taken.")] [SerializeField]
-        public Transform _raycastFrom;
-
+        [SerializeField] public Transform _footPositionTarget;
+        [SerializeField] public Transform _raycastFrom;
         [SerializeField] public Transform _raycastTo;
         [SerializeField] public Transform _targetToModify;
-        [SerializeField] public Transform _targetToModify2;
         [SerializeField] public Vector3 _initialLocalRotationOffset;
         [SerializeField] public float _raycastLength;
+        [SerializeField] public Rigidbody _connectedBody;
 
         [Tooltip("Left foot requires 180 on x, so simply invert normal.")] [SerializeField]
         public bool _invertFinalNormal = false;
     }
 
     [SerializeField] private LayerMask _raycastLayers;
-    [SerializeField] private List<string> _ignoreTags;
-
     [SerializeField] private FootSolution _leftFoot;
     [SerializeField] private FootSolution _rightFoot;
 
     [SerializeField] private Transform _character;
-    [SerializeField] private Transform _hipRoot;
-    [SerializeField] private float _minYMinRoot = -0.4f;
+    [SerializeField] private Transform _hipTarget;
+    [SerializeField] private float _slerpFactor;
+    [SerializeField] private float _anchordDisplacements = 0.4f;
 
-
-    private RaycastHit[] _results = new RaycastHit[5];
     private float _minY = 0;
 
-    private void Update()
+    private IEnumerator Start()
     {
-        _minY = 0;
+        yield return null;
+        MoveFootAnchorRbDown(_leftFoot);
+        MoveFootAnchorRbDown(_rightFoot);
+    }
+
+    private void MoveFootAnchorRbDown(FootSolution foot)
+    {
+        var pos = foot._connectedBody.transform.parent.transform.position;
+        foot._connectedBody.MovePosition(pos + Vector3.down * _anchordDisplacements);
+    }
+
+    private void LateUpdate()
+    {
+        var pos = _character.position;
+        _minY = pos.y;
 
         ModifyFoot(_leftFoot);
         ModifyFoot(_rightFoot);
-        
-        var pos = _hipRoot.position;
-        _minY = Mathf.Max(_minY, _minYMinRoot);
-        _hipRoot.position = new Vector3(pos.x, _minY, pos.z);
+
+        _hipTarget.position = new Vector3(pos.x, _minY, pos.z);
     }
 
     private void ModifyFoot(FootSolution foot)
     {
+        var previous = foot._targetToModify.rotation;
+        
         foot._targetToModify.forward = _character.forward;
         ModifyUp(foot);
         foot._targetToModify.localRotation *= Quaternion.Euler(foot._initialLocalRotationOffset);
+
+        foot._targetToModify.rotation = Quaternion.Slerp(previous,foot._targetToModify.rotation ,Time.deltaTime * _slerpFactor);
     }
 
     private void ModifyUp(FootSolution foot)
     {
         var downDirection = CorrectDownDirection(foot);
-        var raycast = Physics.RaycastNonAlloc(foot._raycastFrom.position, downDirection, _results, foot._raycastLength,
+        var raycast = Physics.Raycast(foot._raycastFrom.position, downDirection, out var hit, foot._raycastLength,
             _raycastLayers.value, QueryTriggerInteraction.Ignore);
-        if (raycast <= 0) return;
-        for (var i = 0; i < raycast; i++)
+        
+        if(raycast)
         {
-            var hit = _results[i];
-            if (_ignoreTags.Contains(hit.transform.tag))
-                continue;
-
             foot._targetToModify.rotation = Quaternion.FromToRotation(_character.up, hit.normal) * _character.rotation;
             if (foot._invertFinalNormal)
             {
                 foot._targetToModify.rotation *= Quaternion.Euler(-180, 0, 0);
             }
 
-            _minY = Mathf.Min(hit.point.y);
-            return;
+            _minY = Mathf.Min(_minY,hit.point.y);
         }
     }
 
