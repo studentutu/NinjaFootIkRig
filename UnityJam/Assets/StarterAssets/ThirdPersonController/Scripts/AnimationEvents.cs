@@ -11,7 +11,7 @@ public class AnimationEvents : MonoBehaviour
     public event Action<Animator,int> AnimationIkCallback;
 
     [SerializeField] private Animator _animator;
-    [SerializeField] private ThirdPersonController _controller;
+    [SerializeField] private TPSController _controller;
 
     [Preserve]
     public void OnFootstep(AnimationEvent animationEvent)

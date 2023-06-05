@@ -8,7 +8,6 @@ public class IK_FootSolver : MonoBehaviour
     [Serializable]
     public class FootSolution
     {
-        [SerializeField] public Transform _footPositionTarget;
         [SerializeField] public Transform _raycastFrom;
         [SerializeField] public Transform _raycastTo;
         [SerializeField] public Transform _targetToModify;
