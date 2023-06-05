@@ -8,33 +8,35 @@ public class IK_FootSolver : MonoBehaviour
     [Serializable]
     public class FootSolution
     {
+        [Header("Position")]
         [SerializeField] public SpringJoint _springJoint;
         [SerializeField] public Rigidbody _footRb;
-        [SerializeField] public Transform _footPositionTarget;
         [SerializeField] public Transform _raycastFrom;
         [SerializeField] public Transform _raycastTo;
+        [SerializeField] public Rigidbody _connectedBody;
+        [Header("Rotation")]
         [SerializeField] public Transform _targetToModify;
         [SerializeField] public Vector3 _initialLocalRotationOffset;
-        [SerializeField] public Rigidbody _connectedBody;
 
         [Tooltip("Left foot requires 180 on x, so simply invert normal.")] [SerializeField]
         public bool _invertFinalNormal = false;
 
         [NonSerialized] public Vector3 PreviousPos;
     }
-
+    [Header("Foot IK")]
+    [SerializeField] private Transform _character;
     [SerializeField] private LayerMask _raycastLayers;
     [SerializeField] private FootSolution _leftFoot;
     [SerializeField] private FootSolution _rightFoot;
-
-    [SerializeField] private Transform _character;
-    [SerializeField] private Transform _hipTarget;
-    [SerializeField] private float _hipOffset;
-    [SerializeField] private float _slerpFactor;
     [SerializeField] public float _footRaycastLength;
     [SerializeField] private float _anchordDisplacements = 0.4f;
     [SerializeField] private float _maxDistanceBetweenTargetAndAnchor = 0.3f;
+    [SerializeField] private float _slerpFactor;
     [SerializeField] private float _maxPrevPosDistance = 0.3f;
+
+    [Header("Hip target position")]
+    [SerializeField] private Transform _hipTarget;
+    [SerializeField] private float _hipOffset;
 
     private float _minY = 0;
     private float _previousMinYLocal = 0;
@@ -74,7 +76,7 @@ public class IK_FootSolver : MonoBehaviour
         foot._connectedBody.MovePosition(pos + Vector3.down * _anchordDisplacements);
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         var pos = _character.position;
         _minY = pos.y + _hipOffset;
@@ -83,7 +85,7 @@ public class IK_FootSolver : MonoBehaviour
         ModifyFoot(_rightFoot);
 
         _hipTarget.position = new Vector3(pos.x, _minY, pos.z);
-        var nextPosition = Mathf.Lerp(_previousMinYLocal,_hipTarget.localPosition.y, Time.deltaTime * 6f);
+        var nextPosition = Mathf.Lerp(_previousMinYLocal,_hipTarget.localPosition.y, Time.deltaTime * 10f);
         _hipTarget.localPosition = new Vector3(0, nextPosition, 0);
         _previousMinYLocal = nextPosition;
     }
@@ -100,7 +102,7 @@ public class IK_FootSolver : MonoBehaviour
         foot._targetToModify.rotation =
             Quaternion.Slerp(previous, foot._targetToModify.rotation, Time.deltaTime * _slerpFactor);
 
-        var targetFootPos = foot._footPositionTarget.position;
+        var targetFootPos = foot._footRb.position;
         var anchorOriginalPos = foot._connectedBody.position;
 
         var connectedPos = anchorOriginalPos;
@@ -111,7 +113,7 @@ public class IK_FootSolver : MonoBehaviour
 
         if ((targetFootPos - connectedPos).sqrMagnitude > sqrCheck)
         {
-            foot._footPositionTarget.position =
+            foot._footRb.transform.position =
                 Vector3.Lerp(targetFootPos, connectedPos, Time.deltaTime * _slerpFactor);
         }
 
@@ -124,9 +126,11 @@ public class IK_FootSolver : MonoBehaviour
 
         if (anchorOriginalPos.y >= targetFootPos.y)
         {
-            foot._footPositionTarget.position =
+            foot._footRb.transform.position =
                 Vector3.Lerp(targetFootPos, anchorOriginalPos, Time.deltaTime * _slerpFactor);
         }
+        
+        // foot._footRb.AddForce(Vector3.down*100,ForceMode.Force);
 
         foot.PreviousPos = foot._footRb.position;
     }

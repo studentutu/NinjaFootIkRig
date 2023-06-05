@@ -131,7 +131,7 @@ MonoBehaviour:
     m_OverridePosition: {x: 0, y: 0, z: 0}
     m_OverrideRotation: {x: 0, y: 0, z: 0}
     m_PositionWeight: 0
-    m_RotationWeight: 1
+    m_RotationWeight: 0.5
     m_Space: 2
 --- !u!1 &406358706392170209
 GameObject:
@@ -1948,7 +1948,7 @@ MonoBehaviour:
     m_OverridePosition: {x: 0, y: 0, z: 0}
     m_OverrideRotation: {x: 0, y: 0, z: 0}
     m_PositionWeight: 0
-    m_RotationWeight: 1
+    m_RotationWeight: 0.5
     m_Space: 2
 --- !u!1 &2410129437842056601
 GameObject:
@@ -4833,8 +4833,8 @@ MonoBehaviour:
   _slerpFactor: 9
   _footRaycastLength: 1.5
   _anchordDisplacements: 0
-  _maxDistanceBetweenTargetAndAnchor: 0.01
-  _maxPrevPosDistance: 0.01
+  _maxDistanceBetweenTargetAndAnchor: 0
+  _maxPrevPosDistance: 0.001
 --- !u!1 &5898049986143282072
 GameObject:
   m_ObjectHideFlags: 0
