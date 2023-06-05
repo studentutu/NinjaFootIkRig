@@ -22,3 +22,6 @@ Included:
 Demo:
 
 ![FootIk](https://github.com/studentutu/NinjaFootIkRig/assets/18601652/fe3d37d3-505d-4bb0-9261-9798a983a46b)
+
+
+![FootIk2](https://github.com/studentutu/NinjaFootIkRig/assets/18601652/c731914b-3969-4928-be9f-902f2529c384)
