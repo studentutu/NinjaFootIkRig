@@ -8,11 +8,11 @@ public class IK_FootSolver : MonoBehaviour
     [Serializable]
     public class FootSolution
     {
+        [SerializeField] public Transform _footPositionTarget;
         [SerializeField] public Transform _raycastFrom;
         [SerializeField] public Transform _raycastTo;
         [SerializeField] public Transform _targetToModify;
         [SerializeField] public Vector3 _initialLocalRotationOffset;
-        [SerializeField] public float _raycastLength;
         [SerializeField] public Rigidbody _connectedBody;
 
         [Tooltip("Left foot requires 180 on x, so simply invert normal.")] [SerializeField]
@@ -26,7 +26,9 @@ public class IK_FootSolver : MonoBehaviour
     [SerializeField] private Transform _character;
     [SerializeField] private Transform _hipTarget;
     [SerializeField] private float _slerpFactor;
+    [SerializeField] public float _footRaycastLength;
     [SerializeField] private float _anchordDisplacements = 0.4f;
+    [SerializeField] private float _maxDistanceBetweenTargetAndAnchor = 0.3f;
 
     private float _minY = 0;
 
@@ -63,12 +65,27 @@ public class IK_FootSolver : MonoBehaviour
         foot._targetToModify.localRotation *= Quaternion.Euler(foot._initialLocalRotationOffset);
 
         foot._targetToModify.rotation = Quaternion.Slerp(previous,foot._targetToModify.rotation ,Time.deltaTime * _slerpFactor);
+
+        var targetFootPos = foot._footPositionTarget.position;
+        var anchorOriginalPos = foot._connectedBody.position;
+
+        var connectedPos = anchorOriginalPos;
+        connectedPos.y = targetFootPos.y;
+        if ((targetFootPos - connectedPos).sqrMagnitude > _maxDistanceBetweenTargetAndAnchor*_maxDistanceBetweenTargetAndAnchor)
+        {
+            foot._footPositionTarget.position = Vector3.Lerp(targetFootPos,connectedPos, Time.deltaTime * _slerpFactor);
+        }
+
+        if (anchorOriginalPos.y >= targetFootPos.y)
+        {
+            foot._footPositionTarget.position = Vector3.Lerp(targetFootPos,anchorOriginalPos, Time.deltaTime * _slerpFactor);
+        }
     }
 
     private void ModifyUp(FootSolution foot)
     {
         var downDirection = CorrectDownDirection(foot);
-        var raycast = Physics.Raycast(foot._raycastFrom.position, downDirection, out var hit, foot._raycastLength,
+        var raycast = Physics.Raycast(foot._raycastFrom.position, downDirection, out var hit, _footRaycastLength,
             _raycastLayers.value, QueryTriggerInteraction.Ignore);
         
         if(raycast)
@@ -91,7 +108,7 @@ public class IK_FootSolver : MonoBehaviour
         void DrawGizomFoot(FootSolution foot)
         {
             var lineFrom = foot._raycastFrom.position;
-            var to = lineFrom + CorrectDownDirection(foot) * foot._raycastLength;
+            var to = lineFrom + CorrectDownDirection(foot) * _footRaycastLength;
             Gizmos.DrawLine(lineFrom, to);
         }
     }
