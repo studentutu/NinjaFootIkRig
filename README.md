@@ -6,14 +6,14 @@ Project includes all of the Ninja rig from Unity Ninja rig demo (workshop)
 
 
 Foot ik is physics based: 
- - baked RootJoints into animations
- - place Rig IK constaints and use create IK Targets
- - use IK target with Rigidbidy and collider + FixedJoint
- - Fixed joint should be linked to animated Root Joints
+ - baked AnchoredPoints into animations
+ - Rig Foot IK constaints and create IK Targets
+ - use IK target with Rigidbidy and collider + SpringJoint
+ - SpringJoint should be linked to animated AnchoredPoints
 
 Issues left : 
- - Still need to fix sliding of the foot
- - Need properly placed physical colliders on the IK Target
+ - Still need to fix sliding of the foot (partially solved, by using FootSolver distance prev positions)
+ - Need properly placed physical colliders on the IK Target (done)
 
 Included: 
  - slightly modified Unity TPS controller ( new one with New Input system)
