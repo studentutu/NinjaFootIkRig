@@ -3,9 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -278,7 +276,7 @@ namespace StarterAssets
                 // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
                 {
-                    _verticalVelocity = 0;
+                    _verticalVelocity = -2;
                 }
 
                 // Jump
@@ -319,7 +317,7 @@ namespace StarterAssets
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (!Grounded && _verticalVelocity < _terminalVelocity)
+            if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }

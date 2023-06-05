@@ -2057,7 +2057,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2705074368382075731}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
   m_Name: 
@@ -3084,6 +3084,7 @@ MonoBehaviour:
     _raycastFrom: {fileID: 5322299994328121053}
     _raycastTo: {fileID: 1407416602626066551}
     _targetToModify: {fileID: 7364654597039770037}
+    _targetToModify2: {fileID: 8319975551295258602}
     _initialLocalRotationOffset: {x: 0, y: -16.33, z: 0}
     _raycastLength: 0.5
     _invertFinalNormal: 0
@@ -3091,6 +3092,7 @@ MonoBehaviour:
     _raycastFrom: {fileID: 2939919591761397103}
     _raycastTo: {fileID: 914439449274297539}
     _targetToModify: {fileID: 8179724521023145290}
+    _targetToModify2: {fileID: 4279989479957377145}
     _initialLocalRotationOffset: {x: 0, y: 16.33, z: 0}
     _raycastLength: 0.5
     _invertFinalNormal: 0
@@ -3250,13 +3252,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.65
+  m_Height: 1.8
   m_Radius: 0.32
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1.05, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &1978499241125540588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4924,7 +4926,7 @@ GameObject:
   - component: {fileID: 8319975551295258602}
   - component: {fileID: 1082343401508147387}
   - component: {fileID: 7425296389067019907}
-  - component: {fileID: 3936563721357697862}
+  - component: {fileID: 1758030021344589001}
   m_Layer: 3
   m_Name: LeftFoot_target
   m_TagString: Untagged
@@ -4991,8 +4993,8 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!135 &3936563721357697862
-SphereCollider:
+--- !u!65 &1758030021344589001
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5010,8 +5012,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.06
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.06320777, y: 0.044362508, z: 0.2060304}
+  m_Center: {x: -0.009861633, y: -0.02, z: 0.038733482}
 --- !u!1 &5338533643702655845
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,7 +5330,7 @@ GameObject:
   - component: {fileID: 4279989479957377145}
   - component: {fileID: 1664502051825067198}
   - component: {fileID: 1339069674205558885}
-  - component: {fileID: 6946372609061252673}
+  - component: {fileID: 3508515684396322995}
   m_Layer: 3
   m_Name: RightFoot_target
   m_TagString: Untagged
@@ -5395,8 +5397,8 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!135 &6946372609061252673
-SphereCollider:
+--- !u!65 &3508515684396322995
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5414,8 +5416,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.06
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.06320777, y: 0.044362508, z: 0.2060304}
+  m_Center: {x: -0.009861633, y: -0.02, z: 0.038733482}
 --- !u!1 &5792728924488341796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5909,7 +5911,7 @@ Transform:
   - {fileID: 301741470646307783}
   - {fileID: 8803800055629908987}
   - {fileID: 4363693552965201812}
-  - {fileID: 5776449440328207155}
+  - {fileID: 7014770622152542259}
   m_Father: {fileID: 5306440726824075430}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -4.9047685, y: 0.78365093, z: -2.0332124}
@@ -7504,7 +7506,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b55d4d66c825484fb428a9710148f0b, type: 3}
---- !u!4 &5776449440328207155 stripped
+--- !u!4 &7014770622152542259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 948857238568668756, guid: 8b55d4d66c825484fb428a9710148f0b, type: 3}
   m_PrefabInstance: {fileID: 7814444740011492967}

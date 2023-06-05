@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: dc1e13f50b24b3f46b0a0ac1ff0b3301
+  m_SerializeEntries:
+  - m_GUID: 525859c8b3f96aa449fd4fc0607f15c1
+    m_Address: Assets/Data/Classes/Hunter.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fbca1d5b9155e4b4f927b63768effb65
+    m_Address: Assets/Data/Classes/Mage.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: edcc687fb519df240954e3cb85dcde64
+    m_Address: Assets/Data/Classes/Rogue.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 06da82f284cd1c74a879ce27777b73cc
+    m_Address: Assets/Data/Classes/Warlock.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 38b126b152a2d694cae14cd1a176084c
+    m_Address: Assets/Data/Classes/Warrior.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 586d581e885f5944899afc85dcfd93c5, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 013e6b3cb4eefeb49ad48cd688c36e52, type: 2}
+    - {fileID: 11400000, guid: 7f14c7255f449f64d956d67fd03141c2, type: 2}

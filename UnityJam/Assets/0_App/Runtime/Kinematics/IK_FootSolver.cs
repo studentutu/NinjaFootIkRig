@@ -13,6 +13,7 @@ public class IK_FootSolver : MonoBehaviour
 
         [SerializeField] public Transform _raycastTo;
         [SerializeField] public Transform _targetToModify;
+        [SerializeField] public Transform _targetToModify2;
         [SerializeField] public Vector3 _initialLocalRotationOffset;
         [SerializeField] public float _raycastLength;
 
@@ -28,6 +29,7 @@ public class IK_FootSolver : MonoBehaviour
 
     [SerializeField] private Transform _character;
     [SerializeField] private Transform _hipRoot;
+    [SerializeField] private float _minYMinRoot = -0.4f;
 
 
     private RaycastHit[] _results = new RaycastHit[5];
@@ -39,9 +41,9 @@ public class IK_FootSolver : MonoBehaviour
 
         ModifyFoot(_leftFoot);
         ModifyFoot(_rightFoot);
-
-
+        
         var pos = _hipRoot.position;
+        _minY = Mathf.Max(_minY, _minYMinRoot);
         _hipRoot.position = new Vector3(pos.x, _minY, pos.z);
     }
 
