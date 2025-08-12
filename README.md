@@ -3,6 +3,7 @@ Unity TPS controller with Ninja demo and physics based foot IK and hip placement
 
 
 Project includes all of the Ninja rig from Unity Ninja rig demo (workshop)
+UnityJam/Assets/StarterAssets/Ninja -> original from here https://github.com/cardosoandre/Animation-Rigging-Examples
 
 
 Foot ik is physics based UnityJam/Assets/0_App/Runtime/Kinematics/IK_FootSolver.cs : 
